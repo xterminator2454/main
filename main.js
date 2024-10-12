@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer');
 const axios = require('axios');
 const path = require('path');
-const mime = require('mime');
 
 require('dotenv').config();
 
@@ -27,10 +26,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const githubToken = process.env.GITHUB_TOKEN; // Your GitHub token
     const repoOwner = 'xterminator2454'; // GitHub username
     const repoName = 'animeisworld'; // GitHub repository name
-    const randomString = Math.random().toString(36).substring(2, 22);
-    const fileMimeType = mime.getType(req.file);
 
     try {
+	const mime = originalname.split(".")[1];
+	console.log(mime)
+	let randomString = Math.random().toString(36).substring(2, 22);
+	randomString += "." + mime;
         // Upload file to GitHub
         const response = await axios.put(
             `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${randomString}`,
@@ -40,8 +41,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
             },
             {
                 headers: {
-                    Authorization: `token ${githubToken}`,
-                    'Content-Type': fileMimeType,
+                    Authorization: `token ${githubToken}`
                 },
             }
         );
