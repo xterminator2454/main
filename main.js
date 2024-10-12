@@ -2,7 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const axios = require('axios');
 const path = require('path');
+const mime = require('mime');
+
 require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +28,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const repoOwner = 'xterminator2454'; // GitHub username
     const repoName = 'animeisworld'; // GitHub repository name
     const randomString = Math.random().toString(36).substring(2, 22);
+    const fileMimeType = mime.getType(req.file);
 
     try {
         // Upload file to GitHub
@@ -37,7 +41,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
             {
                 headers: {
                     Authorization: `token ${githubToken}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': fileMimeType,
                 },
             }
         );
