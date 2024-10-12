@@ -24,11 +24,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const githubToken = process.env.GITHUB_TOKEN; // Your GitHub token
     const repoOwner = 'xterminator2454'; // GitHub username
     const repoName = 'animeisworld'; // GitHub repository name
+    const randomString = Math.random().toString(36).substring(2, 22);
 
     try {
         // Upload file to GitHub
         const response = await axios.put(
-            `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${originalname}`,
+            `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${randomString}`,
             {
                 message: `Upload ${originalname}`,
                 content: buffer.toString('base64'),
