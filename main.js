@@ -31,7 +31,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
         const response = await axios.put(
             `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${randomString}`,
             {
-                message: `Upload ${originalname}`,
+                message: `Upload ${randomString}`,
                 content: buffer.toString('base64'),
             },
             {
