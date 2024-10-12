@@ -42,7 +42,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
             }
         );
 
-        res.send(`File uploaded to GitHub: ${response.data.content.html_url}`);
+        res.send(`https://static.animeis.world/${randomString}`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Error uploading file to GitHub');
