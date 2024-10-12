@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
 app.post('/upload', upload.single('file'), async (req, res) => {
     const { buffer, originalname } = req.file;
     const githubToken = process.env.GITHUB_TOKEN; // Your GitHub token
-    const repoOwner = 'your-username'; // GitHub username
-    const repoName = 'your-repo'; // GitHub repository name
+    const repoOwner = 'xterminator2454'; // GitHub username
+    const repoName = 'animeisworld'; // GitHub repository name
 
     try {
         // Upload file to GitHub
